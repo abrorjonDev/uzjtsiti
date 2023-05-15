@@ -15,12 +15,20 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto" href="{% url 'news' %}">Yangiliklar</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'home' %}#team">Tuzilma</a></li>
-          <li class="dropdown"><a href="#"><span>Ilmiy</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="#"><span>Tuzilma</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="{% url 'home' %}" class="active">Laboratoriyalar</a></li>
-              <li><a href="{% url 'home' %}">Loyihalar</a></li>
-              <li><a href="{% url 'home' %}">Ilmiy-uslubiy ishlar</a></li>
+                {% for tuz in tuzilma %}
+                    <li><a href="{% url 'tuzilma-detail' tuz.slug %}" class="active">{{ tuz.title }}</a></li>
+                {% endfor %}
+
+            </ul>
+          </li>
+
+            <li class="dropdown"><a href="#"><span>Ilmiy</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              {% for ilm in ilmiy %}
+                    <li><a href="{% url 'ilmiy-detail' ilm.slug %}" class="active">{{ ilm.title }}</a></li>
+                {% endfor %}
             </ul>
           </li>
 
