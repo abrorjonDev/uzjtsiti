@@ -41,12 +41,14 @@ class NewsView(ListView):
     queryset = News.objects.all()# .values('title', 'short_description', 'slug', 'image')
     context_object_name = 'news'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         kwargs.update({
             "tuzilma": Tuzilma.objects.all(),
-            "ilmiy": Ilmiy.objects.all()
+            "ilmiy": Ilmiy.objects.all(),
+            "projects": Project.objects.all(),
+            "news": News.objects.all()[:5],
         })
-        return super().get_context_data(object_list, **kwargs)
+        return super().get_context_data(**kwargs)
 
 
 class NewsDetailView(DetailView):
@@ -56,7 +58,9 @@ class NewsDetailView(DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         kwargs.update({
             "tuzilma": Tuzilma.objects.all(),
-            "ilmiy": Ilmiy.objects.all()
+            "ilmiy": Ilmiy.objects.all(),
+            "projects": Project.objects.all(),
+            "news": News.objects.all()[:5],
         })
         return super().get_context_data(object_list, **kwargs)
 
@@ -81,7 +85,9 @@ class TuzilmaView(DetailView):
         kwargs.update({
             "page": "Tuzilma",
             "tuzilma": Tuzilma.objects.all(),
-            "ilmiy": Ilmiy.objects.all()
+            "ilmiy": Ilmiy.objects.all(),
+            "projects": Project.objects.all(),
+            "news": News.objects.all()[:5],
         })
         return super().get_context_data(**kwargs)
 
@@ -95,6 +101,8 @@ class IlmiyView(DetailView):
         kwargs.update({
             "page": "Ilmiy",
             "tuzilma": Tuzilma.objects.all(),
-            "ilmiy": Ilmiy.objects.all()
+            "ilmiy": Ilmiy.objects.all(),
+            "projects": Project.objects.all(),
+            "news": News.objects.all()[:5],
         })
         return super().get_context_data(**kwargs)
